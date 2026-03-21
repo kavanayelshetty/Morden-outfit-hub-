@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Outfit Hub - Pinterest Fashion Inspiration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .pinterest-btn {
+            background: #e60023;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .pinterest-btn:hover {
+            background: #cc0020;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f9fa" width="1200" height="800"/><path fill="%23e9ecef" d="M0 200 Q300 100 600 200 T1200 200 V800 H0 Z"/><circle fill="%23dee2e6" cx="400" cy="300" r="80"/><circle fill="%23ced4da" cx="800" cy="450" r="60"/></svg>');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #e60023;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Pins Grid */
+        .pins-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .pins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .pin-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .pin-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .pin-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .pin-content {
+            padding: 1.5rem;
+        }
+
+        .pin-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .pin-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .pin-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e60023;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pins-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Modern Outfit Hub</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#pins">Outfits</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="https://pinterest.com" target="_blank" class="pinterest-btn">
+                <i class="fab fa-pinterest"></i> Follow on Pinterest
+            </a>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Modern Outfit Hub</h1>
+            <p>Discover endless fashion inspiration with our curated Pinterest boards. From streetwear to high fashion, find your perfect style today!</p>
+            <div class="cta-buttons">
+                <a href="https://pinterest.com" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-pinterest"></i> Explore Pinterest
+                </a>
+                <a href="#pins" class="btn btn-secondary">
+                    <i class="fas fa-images"></i> View Outfits
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pins Section -->
+    <section id="pins" class="pins-section">
+        <h2 class="section-title">Featured Outfits</h2>
+        <div class="pins-grid">
+            <div class="pin-card animate">
+                <div class="pin-image">👗</div>
+                <div class="pin-content">
+                    <div class="pin-title">Summer Street Style</div>
+                    <div class="pin-description">Casual chic outfits perfect for warm days</div>
+                    <div class="pin-stats">
+                        <span>2.5K Saves</span>
+                        <span>1.2K Likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pin-card animate">
+                <div class="pin-image">👔</div>
+                <div class="pin-content">
+                    <div class="pin-title">Office Elegance</div>
+                    <div class="pin-description">Professional looks that turn heads</div>
+                    <div class="pin-stats">
+                        <span>3.8K Saves</span>
+                        <span>2.1K Likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pin-card animate">
+                <div class="pin-image">👟</div>
+                <div class="pin-content">
+                    <div class="pin-title">Sneaker Fashion</div>
+                    <div class="pin-description">Best sneaker combinations for every occasion</div>
+                    <div class="pin-stats">
+                        <span>4.2K Saves</span>
+                        <span>3.0K Likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pin-card animate">
+                <div class="pin-image">✨</div>
+                <div class="pin-content">
+                    <div class="pin-title">Evening Glam</div>
+                    <div class="pin-description">Stunning party outfits and accessories</div>
+                    <div class="pin-stats">
+                        <span>1.9K Saves</span>
+                        <span>900 Likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pin-card animate">
+                <div class="pin-image">👜</div>
+                <div class="pin-content">
+                    <div class="pin-title">Bag Trends</div>
+                    <div class="pin-description">Latest handbag styles and how to style them</div>
+                    <div class="pin-stats">
+                        <span>2.8K Saves</span>
+                        <span>1.5K Likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pin-card animate">
+                <div class="pin-image">💅</div>
+                <div class="pin-content">
+                    <div class="pin-title">Nail Art Inspo</div>
+                    <div class="pin-description">Creative nail designs for every mood</div>
+                    <div class="pin-stats">
+                        <span>5.1K Saves</span>
+                        <span>4.2K Likes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <h2 class="section-title">Style Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card animate">
+                <div class="category-icon">👗</div>
+                <h3 class="category-title">Women's Fashion</h3>
+                <p>Trendy outfits for every occasion</p>
+            </div>
+            <div class="category-card animate">
+                <div class="category-icon">👔</div>
+                <h3 class="category-title">Men's Style</h3>
+                <p>Modern looks for the contemporary man</p>
+            </div>
+            <div class="category-card animate">
+                <div class="category-icon">👶</div>
+                <h3 class="category-title">Kids Fashion</h3>
+                <p>Cute and stylish kids outfits</p>
+            </div>
+            <div class="category-card animate">
+                <div class="category-icon">👠</div>
+                <h3 class="category-title">Shoes & Accessories</h3>
+                <p>Complete your look with perfect accessories</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Modern Outfit Hub</h3>
+                <p>Your go-to source for fashion inspiration on Pinterest. Follow us for daily outfit ideas!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#pins">Outfits</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <a href="https://pinterest.com" target="_blank">Pinterest</a>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">Twitter</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> hello@modernoutfithub.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Worldwide Fashion Trends</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Modern Outfit Hub. All rights reserved. | Designed for Pinterest Lovers</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pin-card, .category-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style
