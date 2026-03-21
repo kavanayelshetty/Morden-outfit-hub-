@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Outfit Hub - Premium Fashion E-commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f8f9fa" width="1200" height="600"/><path fill="%23ff6b6b" d="M0 300Q200 100 400 300T800 300T1200 300V600H0z"/><circle fill="%23feca57" cx="600" cy="200" r="100"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #ff6b6b;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #feca57;
+            border-radius: 2px;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255,107,107,0.95);
+                padding: 1rem;
+                display: none;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Category specific colors */
+        #summer { background: linear-gradient(135deg, #ffeaa7, #fab1a0); }
+        #kids { background: linear-gradient(135deg, #a8e6cf, #dcedc1); }
+        #bags { background: linear-gradient(135deg, #dda0dd, #e6e6fa); }
+        #evening { background: linear-gradient(135deg, #2d3436, #636e72); color: white; }
+        #sneakers { background: linear-gradient(135deg, #00b894, #00cec9); }
+        #nailart { background: linear-gradient(135deg, #fd79a8, #e17055); }
+        #womens { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        #mens { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+        #shoes-accessories { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Glam Outfit Hub</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#summer">Summer Outfit</a></li>
+                <li><a href="#kids">Kids Section</a></li>
+                <li><a href="#bags">Bag Trends</a></li>
+                <li><a href="#evening">Evening Glam</a></li>
+                <li><a href="#sneakers">Sneakers Fashion</a></li>
+                <li><a href="#nailart">Nail Art Inspo</a></li>
+                <li><a href="#womens">Women's Fashion</a></li>
+                <li><a href="#mens">Men's Style</a></li>
+                <li><a href="#shoes-accessories">Shoes & Accessories</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div>
+            <h1>Welcome to Glam Outfit Hub</h1>
+            <p>Discover the latest trends in fashion for everyone</p>
+        </div>
+    </section>
+
+    <!-- Summer Outfit Section -->
+    <section id="summer">
+        <h2 class="section-title">Summer Outfit</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(45deg, #ff9a9e, #fecfef);"></div>
+                <div class="product-info">
+                    <div class="product-name">Tropical Maxi Dress</div>
+                    <div class="product-price">$89.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(45deg, #a8edea, #fed6e3);"></div>
+                <div class="product-info">
+                    <div class="product-name">Linen Crop Top</div>
+                    <div class="product-price">$45.00</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(45deg, #ffecd2, #fcb69f);"></div>
+                <div class="product-info">
+                    <div class="product-name">Floral Wide Leg Pants</div>
+                    <div class="product-price">$69.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kids Section -->
+    <section id="kids">
+        <h2 class="section-title">Kids Section</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ffecd2, #fcb69f);"></div>
+                <div class="product-info">
+                    <div class="product-name">Dino Print T-Shirt</div>
+                    <div class="product-price">$29.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #a8e6cf, #dcedc1);"></div>
+                <div class="product-info">
+                    <div class="product-name">Rainbow Unicorn Dress</div>
+                    <div class="product-price">$49.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ffeaa7, #fab1a0);"></div>
+                <div class="product-info">
+                    <div class="product-name">Space Explorer Jacket</div>
+                    <div class="product-price">$59.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bag Trends -->
+    <section id="bags">
+        <h2 class="section-title">Bag Trends</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #dda0dd, #e6e6fa);"></div>
+                <div class="product-info">
+                    <div class="product-name">Mini Bucket Bag</div>
+                    <div class="product-price">$79.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #fd79a8, #e17055);"></div>
+                <div class="product-info">
+                    <div class="product-name">Structured Tote</div>
+                    <div class="product-price">$129.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe);"></div>
+                <div class="product-info">
+                    <div class="product-name">Crossbody Sling</div>
+                    <div class="product-price">$59.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evening Glam -->
+    <section id="evening">
+        <h2 class="section-title">Evening Glam</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #2d3436, #636e72);"></div>
+                <div class="product-info">
+                    <div class="product-name">Satin Slip Dress</div>
+                    <div class="product-price">$149.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #fdcb6e, #e17055);"></div>
+                <div class="product-info">
+                    <div class="product-name">Sequin Cocktail Dress</div>
+                    <div class="product-price">$199.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #00b894, #00cec9);"></div>
+                <div class="product-info">
+                    <div class="product-name">Velvet Blazer</div>
+                    <div class="product-price">$179.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sneakers Fashion -->
+    <section id="sneakers">
+        <h2 class="section-title">Sneakers Fashion</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #00b894, #00cec9);"></div>
+                <div class="product-info">
+                    <div class="product-name">Chunky Platform Sneakers</div>
+                    <div class="product-price">$119.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #74b9ff, #0984e3);"></div>
+                <div class="product-info">
+                    <div class="product-name">Retro High Tops</div>
+                    <div class="product-price">$99.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #fd79a8, #e17055);"></div>
+                <div class="product-info">
+                    <div class="product-name">Mesh Running Shoes</div>
+                    <div class="product-price">$89.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nail Art Inspo -->
+    <section id="nailart">
+        <h2 class="section-title">Nail Art Inspo</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #fd79a8, #e17055);"></div>
+                <div class="product-info">
+                    <div class="product-name">Glitter Nail Kit</div>
+                    <div class="product-price">$39.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #a8edea, #fed6e3);"></div>
+                <div class="product-info">
+                    <div class="product-name">Chrome Powder Set</div>
+                    <div class="product-price">$49.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ffeaa7, #fab1a0);"></div>
+                <div class="product-info">
+                    <div class="product-name">Gel Polish Collection</div>
+                    <div class="product-price">$69.99</div>
+                    <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Women's Fashion -->
+    <section id="womens">
+        <h2 class="section-title">Women's Fashion</h2>
+        <div class="products-grid">
+           
